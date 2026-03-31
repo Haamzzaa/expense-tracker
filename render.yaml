@@ -2,5 +2,5 @@ services:
   - type: web
     name: expense-tracker
     env: python
-    buildCommand: "pip install -r requirements.txt"
+    buildCommand: "pip install -r requirements.txt && python manage.py migrate"
     startCommand: "gunicorn core.wsgi:application"
