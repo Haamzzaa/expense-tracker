@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['expense-tracker-o6gb.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ALLOWED_HOSTS = ['expense-tracker-o6gb.onrender.com', 'localhost', '127.0.0.1', '.railway.app']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
