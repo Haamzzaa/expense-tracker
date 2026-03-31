@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+        th { background: #4CAF50; color: white; }
+        a { color: red; }
+        .summary { margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <h1>Expense Tracker</h1>
+    <a href="{% url 'add_expense' %}"><button>Add Expense</button></a>
+    <br><br>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+        {% for expense in expenses %}
+        <tr>
+            <td>{{ expense.title }}</td>
+            <td>{{ expense.amount }}</td>
+            <td>{{ expense.category }}</td>
+            <td>{{ expense.date }}</td>
+            <td><a href="{% url 'delete_expense' expense.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="summary">
+        <h2>Total by Category</h2>
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Total</th>
+            </tr>
+            {% for total in totals %}
+            <tr>
+                <td>{{ total.category }}</td>
+                <td>{{ total.total }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
