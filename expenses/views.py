@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Expense
 from .forms import ExpenseForm
 from django.db.models import Sum
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -26,6 +27,9 @@ def delete_expense(request, id):
     expense = Expense.objects.get(id=id)
     expense.delete()
     return redirect('index')
+
+
+@csrf_exempt
 @api_view(['GET', 'POST'])
 def expense_list(request):
     if request.method == 'GET':
@@ -40,6 +44,7 @@ def expense_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@csrf_exempt
 @api_view(['GET', 'PUT', 'DELETE'])
 def expense_detail(request, id):
     try:
